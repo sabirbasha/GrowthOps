@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
@@ -10,10 +10,12 @@ import {
 import ScreenContainer from '../../Containers/ScreenContainer';
 import ScreenLayout from '../../Layouts/ScreenLayout';
 import Typography from '../../Components/Typography';
-import {RED, ECRU_WHITE, WHITE} from '../../../Constants/Colors';
+import { RED, ECRU_WHITE, WHITE } from '../../../Constants/Colors';
 import * as String from '../../../Constants/Strings';
-import {cheackTouchID} from '../../../Utilities/Utility';
-
+import { cheackTouchID } from '../../../Utilities/Utility';
+import {
+  TAB_SCREEN,
+} from '../../navigation/navigationConstant';
 /**
  * Start screen of Application
  */
@@ -28,7 +30,7 @@ class TouchID extends Component {
   };
   laterPressed = () => {
     console.log('[TouchID] >> [laterPressed]');
-    this.props.navigation.navigate('TabScreen');
+    this.props.navigation.navigate(TAB_SCREEN);
   };
   yesButtonPressed = async () => {
     console.log('[TouchID] >> [yesPreesed]');
@@ -36,12 +38,13 @@ class TouchID extends Component {
     if (touchID) {
       Alert.alert('Fingerprint Authentication', 'TouchID added successfully');
       await AsyncStorage.setItem('touchEnable', 'true');
-      this.props.navigation.navigate('TabScreen');
-    } else {
-      Alert.alert('Fingerprint Authentication', 'Unable to verify TouchID');
-      await AsyncStorage.setItem('touchEnable', 'false');
-      this.props.navigation.navigate('TabScreen');
+      this.props.navigation.navigate(TAB_SCREEN);
+      return;
     }
+    Alert.alert('Fingerprint Authentication', 'Unable to verify TouchID');
+    await AsyncStorage.setItem('touchEnable', 'false');
+    this.props.navigation.navigate(TAB_SCREEN);
+
   };
 
   render() {
