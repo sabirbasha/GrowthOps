@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
+import React, {Component} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Alert,
+  AsyncStorage,
+} from 'react-native';
 import ScreenContainer from '../../Containers/ScreenContainer';
 import ScreenLayout from '../../Layouts/ScreenLayout';
 import Typography from '../../Components/Typography';
-import { RED, ECRU_WHITE, WHITE } from '../../../Constants/Colors';
+import {RED, ECRU_WHITE, WHITE} from '../../../Constants/Colors';
 import * as String from '../../../Constants/Strings';
-import { cheackTouchID } from '../../../Utilities/Utility';
+import {cheackTouchID} from '../../../Utilities/Utility';
 
 /**
  * Start screen of Application
@@ -23,14 +30,16 @@ class TouchID extends Component {
     console.log('[TouchID] >> [laterPressed]');
     this.props.navigation.navigate('TabScreen');
   };
-  yesButtonPressed = () => {
+  yesButtonPressed = async () => {
     console.log('[TouchID] >> [yesPreesed]');
     const touchID = cheackTouchID();
     if (touchID) {
       Alert.alert('Fingerprint Authentication', 'TouchID added successfully');
+      await AsyncStorage.setItem('touchEnable', 'true');
       this.props.navigation.navigate('TabScreen');
     } else {
       Alert.alert('Fingerprint Authentication', 'Unable to verify TouchID');
+      await AsyncStorage.setItem('touchEnable', 'false');
       this.props.navigation.navigate('TabScreen');
     }
   };
