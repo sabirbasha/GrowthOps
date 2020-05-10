@@ -3,16 +3,16 @@ import { createAppContainer } from 'react-navigation';
 
 import Login from '../../Components/screens/onBoarding/Login';
 import TouchID from '../../Components/screens/onBoarding/TouchID';
-import TabScreen from '../../Components/screens/Dashboard/TabBar';
 import Webview from '../../Components/screens/onBoarding/Webview';
+import TabRoute from './tabRoute';
 
 
 const Navigation = createStackNavigator(
   {
     Login: Login,
     TouchID: TouchID,
-    TabScreen: TabScreen,
     Webview: Webview,
+    TabRoute: TabRoute,
   },
   {
     initialRouteName: 'Login',
