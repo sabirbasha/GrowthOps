@@ -1,5 +1,12 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React, {Component} from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Alert,
+  Text,
+} from 'react-native';
 import ScreenContainer from '../../Containers/ScreenContainer';
 import ScreenLayout from '../../Layouts/ScreenLayout';
 import Typography from '../../Components/Typography';
@@ -11,14 +18,33 @@ import {
   ROYAL_WHITE,
 } from '../../../Constants/Colors';
 import * as String from '../../../Constants/Strings';
-import { Pages } from 'react-native-pages';
+import {getAllBills} from '../../../services/index';
+import Swiper from 'react-native-swiper';
 
 class Home extends Component {
-  state = {
-
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      billerData: [],
+    };
+  }
+  componentWillMount() {
+    const url = ' https://avocado.od-tech.my/stubs/gateway/bill/list';
+    const data = {};
+    getAllBills(url, data)
+      .then(respone => {
+        const result = respone.data.bill;
+        this.setState({billerData: result});
+      })
+      .catch(error => {
+        console.log('is Error', error);
+        Alert.alert(String.APP_NAME, error.message);
+      });
+  }
 
   render() {
+    const {billerData} = this.state;
+
     return (
       <ScreenContainer backgroundColor={ECRU_WHITE}>
         <ScreenLayout
@@ -40,7 +66,7 @@ class Home extends Component {
                 </View>
               </View>
               <View style={styles.pagesView}>
-                <Pages>
+                <Swiper loop={true}>
                   <Typography
                     text={String.CURRENT_BILL}
                     fontWeight="600"
@@ -57,7 +83,7 @@ class Home extends Component {
                     color={WHITE}
                     style={styles.billerView}
                   />
-                </Pages>
+                </Swiper>
               </View>
               <View style={styles.indexView}>
                 <View style={styles.iconsView}>
@@ -89,24 +115,69 @@ class Home extends Component {
           }
           paddingHorizontal={24}>
           <View style={styles.container}>
-            <View style={styles.billDetailsView}>
-              <Typography
-                text={String.VIEW_ALL_POLICIES}
-                fontWeight="600"
-                fontSize={16}
-                lineHeight={19}
-                textAlign="center"
-                style={styles.allPolicies}
-              />
-              <Typography
-                text={String.VIEW_ALL}
-                fontWeight="600"
-                fontSize={16}
-                lineHeight={19}
-                textAlign="center"
-                style={styles.viewAllText}
-              />
-            </View>
+            <Swiper style={styles.wrapper} loop={true}>
+              {billerData.map((item, key) => {
+                console.log('biller details', item);
+                return (
+                  <View style={styles.billDetailsView} key={item.i}>
+                    <Typography
+                      text={String.VIEW_ALL_POLICIES}
+                      fontWeight="600"
+                      fontSize={16}
+                      lineHeight={19}
+                      style={styles.allPolicies}
+                    />
+                    <Typography
+                      text={'Bill No : ' + item.billNo}
+                      fontWeight="600"
+                      fontSize={16}
+                      lineHeight={19}
+                      textAlign="left"
+                      style={styles.billerText}
+                    />
+                    <Typography
+                      text={'Phone Number : ' + item.phoneNumber}
+                      fontWeight="600"
+                      fontSize={16}
+                      lineHeight={19}
+                      textAlign="left"
+                      style={styles.billerText}
+                    />
+                    <Typography
+                      text={'Due Amount : ' + item.dueAmount}
+                      fontWeight="600"
+                      fontSize={16}
+                      lineHeight={19}
+                      textAlign="left"
+                      style={styles.billerText}
+                    />
+                    <Typography
+                      text={'Remaining Data : ' + item.remainingData}
+                      fontWeight="600"
+                      fontSize={16}
+                      lineHeight={19}
+                      textAlign="left"
+                      style={styles.billerText}
+                    />
+                    <Typography
+                      text={'Due Date : ' + item.dueDate}
+                      fontWeight="600"
+                      fontSize={16}
+                      lineHeight={19}
+                      textAlign="left"
+                      style={styles.billerText}
+                    />
+                    <Typography
+                      text={String.VIEW_ALL}
+                      fontWeight="600"
+                      fontSize={16}
+                      lineHeight={19}
+                      style={styles.allPolicies}
+                    />
+                  </View>
+                );
+              })}
+            </Swiper>
           </View>
         </ScreenLayout>
       </ScreenContainer>
@@ -114,9 +185,13 @@ class Home extends Component {
   }
 }
 const styles = StyleSheet.create({
+  wrapper: {
+    height: 200,
+  },
   container: {
     flex: 1,
     paddingHorizontal: 10,
+    marginTop: 20,
   },
   imageICon: {
     height: 20,
@@ -154,6 +229,11 @@ const styles = StyleSheet.create({
     height: 30,
     marginTop: 10,
   },
+  billerText: {
+    marginTop: 5,
+    height: 20,
+    marginLeft: 20,
+  },
   viewAllText: {
     position: 'absolute',
     bottom: 10,
@@ -178,6 +258,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 100,
     backgroundColor: ROYAL_WHITE,
+    //justifyContent: 'center',
+  },
+  billDetailsView2: {
+    height: 200,
+    borderRadius: 5,
+    marginTop: 100,
+    backgroundColor: 'red',
     flexDirection: 'row',
     justifyContent: 'center',
   },
