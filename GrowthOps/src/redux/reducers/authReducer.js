@@ -1,45 +1,45 @@
-const INITIAL_STATE={
-  isLoggedIn:false,
-  isLoading:false,
-  userData:{},
-  error:undefined
-}
+const INITIAL_STATE = {
+  isLoggedIn: false,
+  isLoading: false,
+  userData: {},
+  error: undefined,
+};
 
-export default function auth(state=INITIAL_STATE,action){
+export default function auth(state = INITIAL_STATE, action) {
   console.log(action.type);
   switch (action.type) {
     case 'LOGIN_ATTEMPT':
-      return{
+      return {
         ...state,
-        isLoading:true,
-        isLoggedIn:false
-      }
+        isLoading: true,
+        isLoggedIn: false,
+      };
       break;
     case 'LOGIN_SUCCESS':
-      return{
+      return {
         ...state,
-        isLoading:false,
-        isLoggedIn:true,
-        userData:action.userData,
-        error:undefined
-      }
+        isLoading: false,
+        isLoggedIn: true,
+        userData: action.userData,
+        error: undefined,
+      };
       break;
     case 'LOGIN_FAILED':
-      return{
+      return {
         ...state,
-        isLoading:false,
-        isLoggedIn:false,
-        error:action.error
-      }
+        isLoading: false,
+        isLoggedIn: false,
+        error: action.error,
+      };
       break;
     case 'LOGOUT':
-      return{
+      return {
         ...state,
-        isLoading:false,
-        isLoggedIn:false
-      }
+        isLoading: false,
+        isLoggedIn: false,
+      };
       break;
     default:
-      return state
+      return state;
   }
 }

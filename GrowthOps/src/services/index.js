@@ -1,9 +1,9 @@
-import ApiManager, {METHOD_GET} from '../manager/ApiManager';
+import ApiManager from '../manager/ApiManager';
 
-export const fetchData = url => {
+export const getAllBills = (url, data) => {
   return new Promise((resolve, reject) => {
     // call api CONTENT_TYPE_APP_JSON
-    ApiManager(url, METHOD_GET)
+    ApiManager(url, data)
       .then(respone => {
         resolve(respone);
       })

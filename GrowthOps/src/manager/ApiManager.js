@@ -1,40 +1,19 @@
 import axios from 'axios';
 
-export const METHOD_GET = 'get';
-export const METHOD_POST = 'post';
-export const CONTENT_TYPE_APP_JSON = 'application/json';
-export const ACCEPT_APP_JSON = 'application/json';
-
-export default function ApiManager(url, reqType) {
-  console.log('Method type is', reqType);
-
-  let prevResolve = null;
-  let prevReject = null;
-
+export default function ApiManager(url, data) {
   return new Promise(async (resolve, reject) => {
-    prevResolve = resolve;
-    prevReject = reject;
-    let headers = {
-      'Content-Type': CONTENT_TYPE_APP_JSON,
-      Accept: ACCEPT_APP_JSON,
-      charset: 'utf-8',
+    const headers = {
+      'Content-Type': 'application/json',
     };
-    let config = {
-      method: reqType,
-      headers: headers,
-    };
-
-    // STEP 1 : MAIN CALL
     axios
-      .get(url)
+      .post(url, data, {
+        headers: headers,
+      })
       .then(response => {
         resolve(response);
       })
-      .catch(async error => {
-        console.log('ApiManager:error:', error.response);
-        if (error.response) {
-          // ERROR HANDLER goes here
-        }
+      .catch(error => {
+        reject(error);
       });
   });
 }
