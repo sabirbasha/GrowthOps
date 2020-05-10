@@ -20,6 +20,9 @@ import {
 import * as String from '../../../Constants/Strings';
 import {getAllBills} from '../../../services/index';
 import Swiper from 'react-native-swiper';
+import {
+  LOGIN_SCREEN,
+} from '../../navigation/navigationConstant';
 
 class Home extends Component {
   constructor(props) {
@@ -29,6 +32,7 @@ class Home extends Component {
     };
   }
   componentWillMount() {
+    console.log('[HomeScreen] >> [componentWillMount]');
     const url = ' https://avocado.od-tech.my/stubs/gateway/bill/list';
     const data = {};
     getAllBills(url, data)
@@ -42,9 +46,13 @@ class Home extends Component {
       });
   }
 
+  logoutPressed = () => {
+    console.log('[HomeScreen] >> [logoutPressed]');
+    this.props.navigation.navigate(LOGIN_SCREEN);
+  };
+
   render() {
     const {billerData} = this.state;
-
     return (
       <ScreenContainer backgroundColor={ECRU_WHITE}>
         <ScreenLayout
@@ -58,12 +66,14 @@ class Home extends Component {
                     style={styles.menuicon}
                   />
                 </View>
-                <View style={styles.logoutView}>
+                <TouchableOpacity
+                  onPress={this.logoutPressed}
+                  style={styles.logoutView}>
                   <Image
                     source={require('../../../assets/logout.png')}
                     style={styles.logouticon}
                   />
-                </View>
+                </TouchableOpacity>
               </View>
               <View style={styles.pagesView}>
                 <Swiper loop={true}>
@@ -117,7 +127,6 @@ class Home extends Component {
           <View style={styles.container}>
             <Swiper style={styles.wrapper} loop={true}>
               {billerData.map((item, key) => {
-                console.log('biller details', item);
                 return (
                   <View style={styles.billDetailsView} key={item.i}>
                     <Typography

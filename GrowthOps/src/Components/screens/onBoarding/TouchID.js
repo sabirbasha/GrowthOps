@@ -21,12 +21,10 @@ import {
  */
 
 class TouchID extends Component {
-  state = {
-    username: '',
-  };
-
+  
   closePressed = () => {
     console.log('[TouchID] >> [loginPressed]');
+    this.props.navigation.goBack();
   };
   laterPressed = () => {
     console.log('[TouchID] >> [laterPressed]');
