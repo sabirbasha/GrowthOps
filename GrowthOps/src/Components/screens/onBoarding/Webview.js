@@ -11,14 +11,13 @@ import Typography from '../../Components/Typography';
 class Webview extends Component {
 
   _onBackPress = () => {
-    console.log('_onBackPress');
+    console.log('[Webview] >> [_onBackPress]');
+
     this.props.navigation.goBack();
   };
 
   render() {
     const { navigation } = this.props;
-    console.log('_onBackPress', navigation.getParam('params').title);
-
     return (
       <ScreenContainer backgroundColor={MEDIUM_GREY}>
         <ScreenLayout

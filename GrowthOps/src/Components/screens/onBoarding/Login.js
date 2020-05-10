@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Alert,
   Keyboard,
-  AsyncStorage
+  AsyncStorage,
 } from 'react-native';
 import ScreenContainer from '../../Containers/ScreenContainer';
 import ScreenLayout from '../../Layouts/ScreenLayout';
@@ -25,8 +25,8 @@ import {
   WEBVIEW_SCREEN,
   TAB_SCREEN,
 } from '../../navigation/navigationConstant';
-import { cheackTouchID } from '../../../Utilities/Utility';
-import { connect } from 'react-redux';
+import {cheackTouchID} from '../../../Utilities/Utility';
+import {connect} from 'react-redux';
 import * as actions from '../../../redux/actions/authActions';
 
 /**
@@ -37,17 +37,17 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'int_test_01',
-      password: 'test',
+      username: '',
+      password: '',
     };
   }
   onUsernameInputTextChange = value => {
     console.log('[LoginScreen] >> [onInputTextChange]');
-    this.setState({ username: value });
+    this.setState({username: value});
   };
   onPasswordInputTextChange = value => {
     console.log('[LoginScreen] >> [onInputTextChange]');
-    this.setState({ password: value });
+    this.setState({password: value});
   };
 
   forgotPasswordPress = () => {
@@ -91,11 +91,11 @@ class Login extends Component {
   };
   loginPressed = async () => {
     console.log('[LoginScreen] >> [loginPressed]');
-    const { username, password } = this.state;
+    const {username, password} = this.state;
     const value = await AsyncStorage.getItem('touchEnable');
 
     Keyboard.dismiss();
-    this.props.login(username, password).then(async () => {
+    this.props.login(username, password).then(() => {
       if (this.props.error) {
         Alert.alert(
           String.LOGIN_FAILED,
@@ -106,7 +106,7 @@ class Login extends Component {
               onPress: () => console.log('Try Again Pressed'),
             },
           ],
-          { cancelable: false },
+          {cancelable: false},
         );
       } else {
         console.log('[LoginScreen] >> [loginPressed]', this.props.userData);
@@ -120,7 +120,7 @@ class Login extends Component {
   };
 
   render() {
-    const { username, password } = this.state;
+    const {username, password} = this.state;
     return (
       <ScreenContainer backgroundColor={ECRU_WHITE}>
         <ScreenLayout
@@ -340,7 +340,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (username, password) => dispatch(actions.login({ username, password })),
+  login: (username, password) => dispatch(actions.login({username, password})),
 });
 
 export default connect(
