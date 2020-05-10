@@ -1,0 +1,30 @@
+export const APP_NAME = 'GrowthOps';
+export const WeLCOME_TEXT = 'Welcome GrowthOps';
+export const USER_ID = 'User Id';
+export const PLACE_HOLDER_USER_ID = 'User ID';
+export const PASSWORD = 'Password';
+export const FORGOT_PASSWORD = 'Forget password';
+export const LOGIN = 'LOGIN';
+export const TOUCHID = 'TOUCH ID';
+export const NEWUSER = 'New user?';
+export const SIGNUP = 'Sign up here';
+export const OR_LOGIN_VIA = 'OR LOGIN VIA';
+export const SETUP_FINGERPRINT = 'Setup Biometric Fingerprint';
+export const ADD_FINGERPRINT = 'Add Your Fingerprint';
+export const FINGERPRINT_TEXT =
+    'lorem ipsum dolor sit amet consectetuer adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ,nostrud';
+export const LATER = 'LATER';
+export const YES = 'YES';
+export const NOTES = 'Notes';
+export const COMING_SOON = ' Page Coming Soon';
+export const CURRENT_BILL = 'Current Bill';
+export const PASTBILL = 'Past Bill';
+export const VIEW_ALL_POLICIES = 'View All Policies';
+export const VIEW_ALL = 'VIEW ALL';
+export const TRY_AGAIN = 'TRY AGAIN';
+export const LOGIN_FAILED = 'Login Failed';
+export const LOGIN_ERROR =
+    'Something went wrong. Kindly ensure you have enter the correct credentials.Please try again';
+export const FINGERPRINT_AUTHENTICATION = 'Fingerprint Authentication';
+export const AUTHENTICATION_SUCESS = 'TouchID added successfully';
+export const AUTHENTICATION_FAILED = 'Unable to verify TouchID';
