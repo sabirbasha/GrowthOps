@@ -15,5 +15,6 @@ Steps to compile the Application
 ![Screenshot](Forgot_Password.png)
 ![Screenshot](TouchID_Screen.png)
 ![Screenshot](Home_Screen.png)
+![Screenshot](Biller_details.png)
 ![Screenshot](Notes_Screen.png)
 
