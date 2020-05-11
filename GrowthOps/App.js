@@ -1,6 +1,6 @@
 /**
  * GrowthOps React Native App
- * https://github.com/facebook/react-native
+ * https://github.com/sabirbasha/GrowthOps
  *
  * @format
  * @flow strict-local

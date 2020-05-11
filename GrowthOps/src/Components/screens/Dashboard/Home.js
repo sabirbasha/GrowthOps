@@ -20,9 +20,7 @@ import {
 import * as String from '../../../Constants/Strings';
 import {getAllBills} from '../../../services/index';
 import Swiper from 'react-native-swiper';
-import {
-  LOGIN_SCREEN,
-} from '../../navigation/navigationConstant';
+import {LOGIN_SCREEN} from '../../navigation/navigationConstant';
 
 class Home extends Component {
   constructor(props) {

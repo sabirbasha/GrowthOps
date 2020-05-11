@@ -2,7 +2,6 @@ import ApiManager from '../manager/ApiManager';
 
 export const getAllBills = (url, data) => {
   return new Promise((resolve, reject) => {
-    // call api CONTENT_TYPE_APP_JSON
     ApiManager(url, data)
       .then(respone => {
         resolve(respone);
