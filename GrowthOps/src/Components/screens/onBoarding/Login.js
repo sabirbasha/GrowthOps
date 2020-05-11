@@ -97,6 +97,7 @@ class Login extends Component {
     Keyboard.dismiss();
     this.props.login(username, password).then(() => {
       if (this.props.error) {
+        this.setState({username: '', password: ''});
         Alert.alert(
           String.LOGIN_FAILED,
           String.LOGIN_ERROR,
