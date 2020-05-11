@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
@@ -25,8 +25,8 @@ import {
   WEBVIEW_SCREEN,
   TAB_SCREEN,
 } from '../../navigation/navigationConstant';
-import {cheackTouchID} from '../../../Utilities/Utility';
-import {connect} from 'react-redux';
+import { cheackTouchID } from '../../../Utilities/Utility';
+import { connect } from 'react-redux';
 import * as actions from '../../../redux/actions/authActions';
 
 /**
@@ -43,11 +43,11 @@ class Login extends Component {
   }
   onUsernameInputTextChange = value => {
     console.log('[LoginScreen] >> [onInputTextChange]');
-    this.setState({username: value});
+    this.setState({ username: value });
   };
   onPasswordInputTextChange = value => {
     console.log('[LoginScreen] >> [onInputTextChange]');
-    this.setState({password: value});
+    this.setState({ password: value });
   };
 
   forgotPasswordPress = () => {
@@ -91,13 +91,13 @@ class Login extends Component {
   };
   loginPressed = async () => {
     console.log('[LoginScreen] >> [loginPressed]');
-    const {username, password} = this.state;
+    const { username, password } = this.state;
     const value = await AsyncStorage.getItem('touchEnable');
 
     Keyboard.dismiss();
     this.props.login(username, password).then(() => {
       if (this.props.error) {
-        this.setState({username: '', password: ''});
+        this.setState({ username: '', password: '' });
         Alert.alert(
           String.LOGIN_FAILED,
           String.LOGIN_ERROR,
@@ -107,7 +107,7 @@ class Login extends Component {
               onPress: () => console.log('Try Again Pressed'),
             },
           ],
-          {cancelable: false},
+          { cancelable: false },
         );
       } else {
         console.log('[LoginScreen] >> [loginPressed]', this.props.userData);
@@ -121,7 +121,7 @@ class Login extends Component {
   };
 
   render() {
-    const {username, password} = this.state;
+    const { username, password } = this.state;
     return (
       <ScreenContainer backgroundColor={ECRU_WHITE}>
         <ScreenLayout
@@ -174,6 +174,7 @@ class Login extends Component {
                   onChangeText={this.onPasswordInputTextChange}
                   placeholder={String.PASSWORD}
                   inputStyle={styles.inputText}
+                  secureTextEntry={true}
                 />
               </View>
             </View>
@@ -341,7 +342,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  login: (username, password) => dispatch(actions.login({username, password})),
+  login: (username, password) => dispatch(actions.login({ username, password })),
 });
 
 export default connect(
