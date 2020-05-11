@@ -30,12 +30,12 @@ export function login(data) {
     // call api CONTENT_TYPE_APP_JSON
     return ApiManager(url, params)
       .then(response => {
-        if (response.status < 300) {
+        if ('jwt' in response.data) {
           dispatch(isLoading(false));
           dispatch(loginSuccess(response.data));
         } else {
           dispatch(isLoading(false));
-          dispatch(loginSuccess(response.data));
+          dispatch(loginFailed(response.data));
         }
       })
       .catch(error => {
