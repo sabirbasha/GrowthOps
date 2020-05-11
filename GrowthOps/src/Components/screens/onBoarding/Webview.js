@@ -1,23 +1,20 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { WebView } from 'react-native-webview';
+import React, {Component} from 'react';
+import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {WebView} from 'react-native-webview';
 import ScreenContainer from '../../Containers/ScreenContainer';
 import ScreenLayout from '../../Layouts/ScreenLayout';
 import HeaderLayout from '../../Layouts/HeaderLayout';
-// import HeaderBackButton from '../';
-import { MEDIUM_GREY } from '../../../Constants/Colors';
+import {MEDIUM_GREY} from '../../../Constants/Colors';
 import Typography from '../../Components/Typography';
 
 class Webview extends Component {
-
   _onBackPress = () => {
     console.log('[Webview] >> [_onBackPress]');
-
     this.props.navigation.goBack();
   };
 
   render() {
-    const { navigation } = this.props;
+    const {navigation} = this.props;
     return (
       <ScreenContainer backgroundColor={MEDIUM_GREY}>
         <ScreenLayout

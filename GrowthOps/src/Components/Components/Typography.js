@@ -30,8 +30,6 @@ const Typography = ({
           letterSpacing,
           textAlign,
           color,
-          // borderWidth: 1,
-          // borderColor: "red"
         },
         style,
       ]}
